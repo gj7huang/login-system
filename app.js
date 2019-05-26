@@ -48,7 +48,8 @@ app.get('/showAllUser', (req, res) => {
 })
 
 app.post('/register', (req, res) => {
-    let { email, student_id, password, gender} = req.query;
+    let { email, student_id, password, gender} = req.body;
+    //console.log(req.body);
 
     bcrypt.hash(password, 10).then((hash) => {
 
@@ -59,65 +60,74 @@ app.post('/register', (req, res) => {
             token: hash,
             gender: gender
         });
-        newUser.save()
-        .then((result)=> {
-            res.send({
-                code: 200,
-                successMsg: 'register successfully',
-                user: {
-                    token: hash,
+        //console.log(hash);
+        newUser.save(err => {
+            if (err) {
+                if (err.code === 11000) {
+                    res.status(400).send({
+                        code: 400,
+                        errorMsg: 'This account already exists...'
+                    });
+                } else {
+                    res.status(400).send({
+                        code: 400,
+                        errorMsg: err.message
+                    });
                 }
-            });
-        })
-        .catch((err) => {
-            if (err.code === 11000) {
-                res.status(400).send({
-                    code: 400,
-                    errorMsg: 'This account already exists'
-                });
-            } else if (err) {
-                res.status(400).send({
-                    code: 400,
-                    errorMsg: err.message
+            } else {
+                res.send({
+                    code: 200,
+                    successMsg: 'register successfully!',
+                    user: {
+                        token: hash,
+                    }
                 });
             }
         })
     })
 });
 app.post('/login', (req, res) => {
-    let { email, student_id, password } = req.query;
-
-    User.findOne({ 
-        email: email, 
-        student_id: student_id,
-    }).exec((err, user) => {
-        if(err) {
-            res.status(400).send({
-                code: 400,
-                errorMsg: 'Account doesn\'t exist'
-            });
-        } else {
-            if(!bcrypt.compareSync(password, user.token)) {
+    let { email, password } = req.body;
+    if(email && password) {
+        User.findOne({
+            email: email,
+            //student_id: student_id
+        }).exec((err, user) => {
+            if(!user) {
+                console.log(err);
                 res.status(400).send({
                     code: 400,
-                    user: 'Password is wrong'
+                    errorMsg: 'Account doesn\'t exist...'
                 });
             } else {
-                let { _id, email, student_id, token, gender } = user;
-                res.status(200).send({
-                    code: 200,
-                    successMsg: 'Login!',
-                    user: { 
-                        id: _id,
-                        email: email, 
-                        student_id: student_id, 
-                        token: token,
-                        gender: gender
-                    }
-                });
+                if(!bcrypt.compareSync(password, user.token)) {
+                    res.status(400).send({
+                        code: 400,
+                        errorMsg: 'Password is wrong...'
+                    });
+                } else {
+                    let { _id, email, student_id, token, gender } = user;
+                    res.status(200).send({
+                        code: 200,
+                        successMsg: 'Login !',
+                        user: { 
+                            id: _id,
+                            email: email, 
+                            student_id: student_id, 
+                            token: token,
+                            gender: gender
+                        }
+                    });
+                }
             }
-        }
-    })
+        })
+    } else {
+        res.status(400).send({
+            code: 400,
+            errorMsg: 'Email, Password must be provided...'
+        });
+    }
+    
 });
 
 
