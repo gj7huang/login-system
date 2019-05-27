@@ -1,0 +1,145 @@
+.wrap, .login-body, .register-body {
+  justify-content: center;
+  align-items: center;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: url('https://asdb.az.gov/wp-content/uploads/2016/05/gradient_11.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#wrap {
+  width: 100%;
+  height: 100vh;
+  background: rgba(138, 164, 190, 0.5);
+  display: flex;
+  justify-content: center;
+}
+#user-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+}
+#login {
+  width: 500px;
+  height: 650px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px 1px #7f8c8d;
+}
+.toggle-bar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+}
+.toggle-bar > :first-child {
+  border-right: 1px solid #243342;
+}
+.toggle-bar > :last-child {
+  border-left: 1px solid #243342;
+}
+.toggle-login, .toggle-register {
+  width: 50%;
+  background-color: #2c3e50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.toggle-login span, .toggle-register span {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+}
+.toggle-login:hover, .toggle-register:hover {
+  background-color: #425d78;
+}
+.active {
+  background-color: #425d78;
+}
+.login-body, .register-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#forgot-password, #registered {
+  color: #5f5f5f;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-bottom: 8px;
+}
+#forgot-password:hover, #registered:hover {
+  color: #2f2f2f;
+}
+.input-section {
+  width: 100%;
+  text-align: center;
+}
+#register-msg, #login-msg {
+    color: red;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0 5px;
+}
+.input-section:first-child {
+  margin-top: 10px;
+}
+input, .btn {
+  font-size: 20px; 
+  width: 300px;
+  padding: 20px 30px;
+  margin-top: 10px;
+}
+#gender-select {
+    text-indent: 23px;
+    font-size: 20px;
+    width: 365px;
+    height: 65px;
+    margin-top: 10px;
+}
+input.user-input, .btn.user-input {
+  border: 1px solid #ddd;
+}
+.btn {
+  background-color: #2c3e50;
+  color: #fff;
+  border: none;
+  transition: background-color 0.2s;
+}
+.btn:hover {
+  background-color: #425d78;
+  cursor: pointer;
+}
+.fas {
+  color: #2c3e50;
+  margin-right: 5px;
+}
+.user-input:focus {
+  border: 1px solid #aaa;
+}
+#all-user-info {
+    width: 70%;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    align-content: center;
+    font-size: 12px;
+}
+.user-info {
+    width: 190px;
+    background-color: #fff;
+    margin: 5px 5px;
+    padding: 10px 5px;
+    box-shadow: 0px 2px 5px 1px #7f8c8d;
+}
+
+.user-active {
+    border: 2px solid red;
+    padding: 9px 4px;
+}
