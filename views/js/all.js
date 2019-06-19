@@ -69,7 +69,6 @@ function readyFunc() {
         }).then(res => {
             $('#all-user-info > div').removeClass('user-active');
             userList.map((el, index) => {
-                // console.log(el.student_id === res.user.student_id);
                 if (el.student_id === res.user.student_id) {
                     loginUserIndex = index;
                     $(`#item-${index}`).addClass('user-active');
@@ -78,7 +77,7 @@ function readyFunc() {
             $('#login-msg').text(res.successMsg);
         }).catch(err => {
             $('#all-user-info > div').removeClass('user-active');
-            // console.log(err);
+
             $('#login-msg').text(err.responseJSON.errorMsg);
         });
     })
@@ -89,7 +88,6 @@ function readyFunc() {
         let pwd = $('#register-pwd').val();
         let gender = $('#gender-select').val();
 
-        // console.log(`${student_id}-${email}-${pwd}-${gender}`)
         $.ajax({
             url: '/register',
             method: "POST",

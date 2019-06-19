@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt';
 
 
 const app = express();
-const [PORT = 8080, HOST = `localhost`] = [process.env.PORT, process.env.CUSTOMVAR_HOSTNAME];
+const [PORT = 3000, HOST = `localhost`] = [process.env.PORT, process.env.CUSTOMVAR_HOSTNAME];
 
 
 app.engine('html', require('ejs').renderFile);
@@ -134,7 +134,6 @@ app.post('/login', (req, res) => {
             });
     })
 });
-
 
 app.use((req, res, next) => {
     res.status(404).send('404!');
